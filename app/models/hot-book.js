@@ -11,15 +11,15 @@ class HotBook extends Model {
         books.forEach(book => {
             ids.push(book.id)
         });
-        const favors = await Favor.findAll({
-            where: {
-                art_id: {
-                    [Op.in]: ids,
-                    type: 400
-                }
+        const favors =await Favor.findAll({
+            where:{
+                art_id:{
+                    [Op.in]:ids,
+                },
+                type:400
             },
-            group: ['art_id'],
-            attributes: ['art_id', [Sequelize.fn('COUNT', '*'), 'count']]
+            group:['art_id'],
+            attributes:['art_id', [Sequelize.fn('COUNT','*'),'count']]
         })
         books.forEach(book=>{
             HotBook._getEachBookStatus(book, favors)
@@ -34,7 +34,7 @@ class HotBook extends Model {
                 count = favor.get('count')
             }
         })
-        book.setDataValue('count', count);
+        book.setDataValue('fav_nums', count);
         return book;
     }
 }

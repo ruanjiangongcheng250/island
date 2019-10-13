@@ -4,7 +4,7 @@ const {
     Sentence
 } = require('./classic');
 const { Op } = require('sequelize')
-const { faltten } = require('lodash')
+const { flatten } = require('lodash')
 const { PostiveIntegerValidator } = require('@validators')
 const { Flow } = require('../models/flow');
 const { Favor } = require('./favor');
@@ -48,8 +48,13 @@ class Art {
                 art = await Sentence.scope(scope).findOne(finder)
                 break;
             case 400:
-                art = await Sentence.scope(scope).findOne(finder)
-
+                const { Book } = require('./book');
+                art = await Book.scope(scope).findOne(finder)
+                if(!art){
+                    art = await Book.create({
+                        id: art_id
+                    })
+                }
                 break;
             default:
                 break;
@@ -75,7 +80,7 @@ class Art {
             const type = parseInt(key)
             arts.push(await Art._getListByType(ids, type))
         }
-        return arts;
+        return flatten(arts);
     }
 
     static async _getListByType(ids, type) {

@@ -1,5 +1,7 @@
 require('module-alias/register')
 const Koa = require('koa');
+const static = require('koa-static')
+const path = require('path')
 const parser = require('koa-bodyparser');
 const InitManger = require('./core/init');
 const catchError = require('./middleware/exception')
@@ -7,6 +9,7 @@ const catchError = require('./middleware/exception')
 const app = new Koa();
 app.use(catchError);
 app.use(parser());
+app.use(static(path.join(__dirname, './static')))
 InitManger.InitCore(app);
 //app 应用程序对象
 //中间件就是一个函数

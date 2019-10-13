@@ -179,9 +179,9 @@ class AddShortCommentValidator extends PostiveIntegerValidator {
     constructor(){
         super()
         this.content = [
-            new Rule('isLength', '必须在1到24个字符之间', {
+            new Rule('isLength', '必须在1到12个字符之间', {
                 min: 1,
-                max: 24
+                max: 12
             })
         ]
     }

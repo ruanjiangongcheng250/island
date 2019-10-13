@@ -1,6 +1,5 @@
 const { Sequelize, Model, Op } = require('sequelize');
 const { sequelize } = require('../../core/db');
-
 class Favor extends Model {
     static async like(art_id, type, uid) {
         const { Art } = require('./art');
