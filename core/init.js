@@ -1,4 +1,4 @@
-const requireDirectory = require('require-Directory');
+const requireDirectory = require('require-directory');
 const Router = require('koa-router');
 const exceptions = require('./http-exception')
 class InitManager{
