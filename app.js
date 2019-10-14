@@ -14,3 +14,4 @@ InitManger.InitCore(app);
 //app 应用程序对象
 //中间件就是一个函数
 app.listen(3000);
+console.log('*****************服务器启动**********');
