@@ -13,5 +13,5 @@ app.use(static(path.join(__dirname, './static')))
 InitManger.InitCore(app);
 //app 应用程序对象
 //中间件就是一个函数
-app.listen(3000);
+app.listen(443);
 console.log('*****************服务器启动**********');
