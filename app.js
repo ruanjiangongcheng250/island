@@ -18,7 +18,7 @@ if(isProd){
     // Force HTTPS on all page
     app.use(enforceHttps());
     const options = {
-        key: fs.readFileSync('./app/ssl/privatekey.kye'),
+        key: fs.readFileSync('./app/ssl/privatekey.key'),
         cert: fs.readFileSync('./app/ssl/certificate.crt')
       };
     https.createServer(options, app.callback()).listen(443);
