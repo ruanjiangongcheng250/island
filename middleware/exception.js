@@ -1,12 +1,11 @@
 const {HttpException} = require('../core/http-exception');
-const config = require('../config/config')
 const catchError = async (ctx, next)=> {
     try {
         await next();
     } catch (error) {
-        const isDev = global.config.environment === 'dev';
+        const isProd = process.env.MODE === 'prod';
         const isHttpException = error instanceof HttpException;
-        if(isDev && !isHttpException){
+        if(!isProd && !isHttpException){
             throw error;
         }
         if(isHttpException){

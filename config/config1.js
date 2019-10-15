@@ -1,5 +1,4 @@
 module.exports = {
-    environment: 'dev',
     database: {
         dbName: 'island',
         host: 'localhost',

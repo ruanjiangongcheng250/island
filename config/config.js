@@ -1,5 +1,4 @@
 module.exports = {
-    environment: 'dev',
     database: {
         dbName: 'island',
         host: '127.0.0.1',
@@ -20,5 +19,5 @@ module.exports = {
         detailUrl:'http://t.yushu.im/v2/book/id/%s',
         keywordUrl:'http://t.yushu.im/v2/book/search?q=%s&count=%s&start=%s&summary=%s'
     },
-    host: 'https://juemingzi.club/'
+    host: process.env.MODE === 'prod' ? 'https://juemingzi.club/' : 'http://localhost:3000/'
 }

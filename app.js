@@ -8,21 +8,22 @@ const fs = require('fs');
 const { default: enforceHttps }  = require('koa-sslify');
 const InitManger = require('./core/init');
 const catchError = require('./middleware/exception')
-
-
+const isProd = process.env.MODE === 'prod'
 const app = new Koa();
-// Force HTTPS on all page
-app.use(enforceHttps());
 app.use(catchError);
 app.use(parser());
 app.use(static(path.join(__dirname, './static')))
-const options = {
-    key: fs.readFileSync('./app/ssl/privatekey.pem'),
-    cert: fs.readFileSync('./app/ssl/certificate.pem')
-  };
 InitManger.InitCore(app);
-//app 应用程序对象
-//中间件就是一个函数
-app.listen(3000);
-https.createServer(options, app.callback()).listen(443);
-console.log('*****************服务器启动**********');
+if(isProd){
+    // Force HTTPS on all page
+    app.use(enforceHttps());
+    const options = {
+        key: fs.readFileSync('./app/ssl/privatekey.pem'),
+        cert: fs.readFileSync('./app/ssl/certificate.pem')
+      };
+    https.createServer(options, app.callback()).listen(443);
+}else{
+    //app 应用程序对象
+    //中间件就是一个函数
+    app.listen(3000);
+}
