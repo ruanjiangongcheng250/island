@@ -5,7 +5,7 @@ const path = require('path')
 const parser = require('koa-bodyparser');
 const https = require('https');
 const fs = require('fs');
-const enforceHttps = require('koa-sslify');
+const { default: enforceHttps }  = require('koa-sslify');
 const InitManger = require('./core/init');
 const catchError = require('./middleware/exception')
 
@@ -23,8 +23,6 @@ const options = {
 InitManger.InitCore(app);
 //app 应用程序对象
 //中间件就是一个函数
-app.listen(443);
-https.createServer(options, app).listen(443, function () {
-    console.log('Https server listening on port ' + 443);
-});
+app.listen(3000);
+https.createServer(options, app.callback()).listen(443);
 console.log('*****************服务器启动**********');
